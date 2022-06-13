@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.asi.composenavigationtutorial.LocalNavController
 
 /**
  * @ClassName LoginPage.java
@@ -23,14 +24,14 @@ import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun LoginPage(navController: NavController) {
+fun LoginPage(navController: NavController= LocalNavController.current) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
 
         Text(text = "登录页", Modifier.padding(top = 80.dp))
 
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
-            navController.navigate("home")
+            navController.popBackStack()
         }) {
             Text(text = "跳转到home")
         }

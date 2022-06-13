@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.asi.composenavigationtutorial.model.UserBean
+import com.asi.composenavigationtutorial.LocalNavController
 
 /**
  * @ClassName LoginPage.java
@@ -24,24 +24,21 @@ import com.asi.composenavigationtutorial.model.UserBean
 
 
 @Composable
-fun NavTypePage(navController: NavController, userBean: UserBean?) {
+fun RegisterPage(navController: NavController= LocalNavController.current) {
+
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "用户页", Modifier.padding(top = 80.dp))
-        Text(text = "用户名字=${userBean?.name}", Modifier.padding(top = 80.dp))
+
+        Text(text = "注册页", Modifier.padding(top = 80.dp))
 
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
-            navController.navigate("home") {
-
-                popUpTo("home") {
-                    inclusive = true
-                }
-            }
+            navController.popBackStack()
         }) {
-            Text(text = "返回主页")
+            Text(text = "返回")
         }
-    }
-}
 
+    }
+
+}
 
 
 

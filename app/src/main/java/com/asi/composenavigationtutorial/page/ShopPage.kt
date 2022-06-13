@@ -8,10 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.asi.composenavigationtutorial.LocalNavController
 
 /**
  * @ClassName LoginPage.java
@@ -23,27 +22,16 @@ import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun UserPage(navController: NavController, userId: String?) {
+fun ShopPage(navController: NavController = LocalNavController.current) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "用户页", Modifier.padding(top = 80.dp))
-        Text(text = "用户id=$userId", Modifier.padding(top = 80.dp))
+        Text(text = "列表", Modifier.padding(top = 80.dp))
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
-            navController.navigate("home") {
-                popUpTo("home") {
-                    inclusive = true
-                }
-            }
+            navController.popBackStack()
         }) {
-            Text(text = "返回主页")
+            Text(text = "跳转到详情页")
         }
     }
 }
 
-
-@Preview
-@Composable
-fun PreviewUserPage() {
-    UserPage(rememberNavController(), "1")
-}
 
 

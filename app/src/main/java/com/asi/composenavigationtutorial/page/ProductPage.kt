@@ -13,35 +13,31 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
+import com.asi.composenavigationtutorial.LocalNavController
 import com.asi.composenavigationtutorial.model.UserBean
+import com.asi.composenavigationtutorial.route.DestinationArg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
- * @ClassName ViewModelPage.java
+ * @ClassName LoginPage.java
  * @author usopp
  * @version 1.0.0
  * @Description TODO
- * @createTime 2022年06月10日 18:00:00
+ * @createTime 2022年06月10日 14:26:00
  */
 
 
 @Composable
-fun ViewModelPage(navController: NavController, viewModel: MyViewModel = hiltViewModel()) {
-
+fun ProductPage(viewModel: MyViewModel = hiltViewModel()) {
     val state = viewModel.state.value
+    val navController = LocalNavController.current
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "用户页", Modifier.padding(top = 80.dp))
+        Text(text = "商品详情页", Modifier.padding(top = 80.dp))
         Text(text = "用户名字=${state.userBean?.name}", Modifier.padding(top = 80.dp))
 
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
-            navController.navigate("home") {
-
-                popUpTo("home") {
-                    inclusive = true
-                }
-            }
+            navController.popBackStack()
         }) {
             Text(text = "返回主页")
         }
@@ -52,7 +48,7 @@ fun ViewModelPage(navController: NavController, viewModel: MyViewModel = hiltVie
 @HiltViewModel
 class MyViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel(
 ) {
-    private val _userBean: UserBean? = savedStateHandle.get<UserBean>("user")
+    private val _userBean: UserBean? = savedStateHandle.get<UserBean>(DestinationArg)
     val state = mutableStateOf(State(
         _userBean
     ))

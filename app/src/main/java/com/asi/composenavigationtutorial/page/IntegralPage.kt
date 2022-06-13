@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.asi.composenavigationtutorial.LocalNavController
 
 /**
  * @ClassName LoginPage.java
@@ -23,22 +24,17 @@ import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun ListPage(navController: NavController) {
+fun IntegralPage() {
+    val navController = LocalNavController.current
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text(text = "列表", Modifier.padding(top = 80.dp))
+        Text(text = "详情", Modifier.padding(top = 80.dp))
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
-            navController.navigate("details")
+            navController.popBackStack()
         }) {
-            Text(text = "跳转到详情页")
+            Text(text = "返回主页")
         }
     }
 }
 
-
-@Preview
-@Composable
-fun PreviewListPage() {
-    ListPage(rememberNavController())
-}
 
 
