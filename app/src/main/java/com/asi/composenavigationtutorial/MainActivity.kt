@@ -1,7 +1,6 @@
 package com.asi.composenavigationtutorial
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
@@ -16,7 +15,9 @@ import com.asi.composenavigationtutorial.model.UserBean
 import com.asi.composenavigationtutorial.model.UserNavType
 import com.asi.composenavigationtutorial.page.*
 import com.asi.composenavigationtutorial.ui.theme.ComposeNavigationTutorialTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,14 @@ class MainActivity : ComponentActivity() {
                     ) {
                         val userBean = it.arguments?.getParcelable<UserBean>("user")
                         NavTypePage(navController, userBean)
+                    }
+
+
+                    composable(
+                        "viewmodel/{user}",
+                        arguments = listOf(navArgument("user") { type = UserNavType() })
+                    ) {
+                        ViewModelPage(navController)
                     }
                 }
             }

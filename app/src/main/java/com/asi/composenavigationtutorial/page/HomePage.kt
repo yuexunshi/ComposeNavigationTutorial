@@ -42,6 +42,12 @@ fun HomePage(navController: NavController) {
         Text(text = "主页", Modifier.padding(top = 80.dp))
         Button(modifier = Modifier.padding(top = 80.dp), onClick = {
             val userBean = UserBean("新垣结衣", 18)
+            navController.navigate("viewmodel/$userBean")
+        }) {
+            Text(text = "跳转到ViewModel页")
+        }
+        Button(modifier = Modifier.padding(top = 80.dp), onClick = {
+            val userBean = UserBean("新垣结衣", 18)
             val json = Uri.encode(Gson().toJson(userBean))
             navController.popBackStack()
             navController.navigate("navtype/$json")

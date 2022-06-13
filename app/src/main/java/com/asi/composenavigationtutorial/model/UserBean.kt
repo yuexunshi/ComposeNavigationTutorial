@@ -1,5 +1,6 @@
 package com.asi.composenavigationtutorial.model
 
+import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.navigation.NavType
@@ -15,7 +16,11 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class UserBean(val name:String,val age:Int):Parcelable
+data class UserBean(val name:String,val age:Int):Parcelable{
+    override fun toString(): String {
+        return Uri.encode(Gson().toJson(this))
+    }
+}
 
 class UserNavType : NavType<UserBean>(isNullableAllowed = false) {
     override fun get(bundle: Bundle, key: String): UserBean? {
